@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111111">
-<title>Xe máy — Vị trí đỗ</title>
+<title>Your Parking Position</title>
 <style>
   *{box-sizing:border-box}
   body{
-    margin:0; min-height:100vh; background:#111; color:#fff;
+    margin:0; min-height:100vh; background:#666; color:#fff;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     display:flex; align-items:center; justify-content:center;
     -webkit-tap-highlight-color:transparent;
@@ -36,8 +36,8 @@
 <body>
 <main class="app">
   <div class="icon">🛵</div>
-  <h1>XE MÁY</h1>
-  <div class="sub">Vị trí đỗ hiện tại</div>
+  <h1>MY PARKING</h1>
+  <div class="sub">your current parking position</div>
 
   <div class="floor" id="b1" onclick="setFloor('B1')">
     <div class="label">B1</div><div class="status"></div>
@@ -46,8 +46,8 @@
     <div class="label">B2</div><div class="status"></div>
   </div>
 
-  <button onclick="toggleFloor()">ĐỔI VỊ TRÍ</button>
-  <div class="hint">Chạm B1/B2 để chọn trực tiếp.<br>Trạng thái được lưu trên thiết bị này.</div>
+  <button onclick="toggleFloor()">SWITCH</button>
+  <div class="hint">Select parking position</div>
 </main>
 
 <script>
@@ -59,7 +59,7 @@ function render(){
     const el=document.getElementById(f.toLowerCase());
     const active=f===current;
     el.classList.toggle('active',active);
-    el.querySelector('.status').textContent=active?'● ĐANG ĐỖ Ở ĐÂY':'○ Không chọn';
+    el.querySelector('.status').textContent=active?'● PARKING':'○ None';
   });
 }
 function setFloor(f){localStorage.setItem(KEY,f);render()}
