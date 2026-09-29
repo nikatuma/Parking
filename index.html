@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Xe máy — Vị trí đỗ</title>
+<style>
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; background:#111; color:#fff;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .app{width:min(92vw,430px); padding:28px 20px 34px; text-align:center}
+  .icon{font-size:42px; margin-bottom:8px}
+  h1{font-size:22px;margin:0 0 6px;font-weight:700}
+  .sub{color:#999;font-size:14px;margin-bottom:28px}
+  .floor{
+    width:100%; border:2px solid #333; border-radius:24px;
+    padding:25px 20px; margin:12px 0; background:#191919;
+    transition:.18s; cursor:pointer;
+  }
+  .floor.active{border-color:#fff;background:#f2f2f2;color:#111;transform:scale(1.015)}
+  .floor .label{font-size:38px;font-weight:800;letter-spacing:1px}
+  .floor .status{font-size:14px;margin-top:7px;color:#777}
+  .floor.active .status{color:#333;font-weight:600}
+  button{
+    margin-top:18px;width:100%;height:58px;border:0;border-radius:18px;
+    background:#fff;color:#111;font-size:17px;font-weight:700;cursor:pointer;
+  }
+  .hint{margin-top:18px;color:#777;font-size:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<main class="app">
+  <div class="icon">🛵</div>
+  <h1>XE MÁY</h1>
+  <div class="sub">Vị trí đỗ hiện tại</div>
+
+  <div class="floor" id="b1" onclick="setFloor('B1')">
+    <div class="label">B1</div><div class="status"></div>
+  </div>
+  <div class="floor" id="b2" onclick="setFloor('B2')">
+    <div class="label">B2</div><div class="status"></div>
+  </div>
+
+  <button onclick="toggleFloor()">ĐỔI VỊ TRÍ</button>
+  <div class="hint">Chạm B1/B2 để chọn trực tiếp.<br>Trạng thái được lưu trên thiết bị này.</div>
+</main>
+
+<script>
+const KEY='motorbike-parking-floor';
+function getFloor(){return localStorage.getItem(KEY)||'B1'}
+function render(){
+  const current=getFloor();
+  ['B1','B2'].forEach(f=>{
+    const el=document.getElementById(f.toLowerCase());
+    const active=f===current;
+    el.classList.toggle('active',active);
+    el.querySelector('.status').textContent=active?'● ĐANG ĐỖ Ở ĐÂY':'○ Không chọn';
+  });
+}
+function setFloor(f){localStorage.setItem(KEY,f);render()}
+function toggleFloor(){setFloor(getFloor()==='B1'?'B2':'B1')}
+render();
+</script>
+</body>
+</html>
